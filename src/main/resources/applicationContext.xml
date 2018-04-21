@@ -16,10 +16,10 @@
 
     <!-- 配置自动扫描的包 -->
     <context:component-scan base-package="org.ssh">
-        <context:exclude-filter type="annotation"
+<!--        <context:exclude-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller" />
         <context:exclude-filter type="annotation"
-                                expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice" />-->
     </context:component-scan>
     <!-- 配置数据源 -->
     <context:property-placeholder location="classpath:config.properties"/>
@@ -29,25 +29,25 @@
         <property name="driverClass" value="${jdbc.driver}"/>
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <!-- 配置其他属性 -->
-        <property name="initialPoolSize" value="${jdbc.initPoolSize}"/>
-        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+        <!--<property name="initialPoolSize" value="${jdbc.initPoolSize}"/>
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>-->
     </bean>
     <!-- 配置JPA部分 -->
     <!-- 配置JPA的EntityManagerFactory -->
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
+        <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
-        <property name="packagesToScan" value="org.ssh.entity"></property>
+        <property name="packagesToScan" value="org.ssh.entity"/>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
                 <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
@@ -56,20 +56,20 @@
             </props>
         </property>
         <!--使用二級緩存-->
-        <property name="sharedCacheMode" value="ENABLE_SELECTIVE"></property>
+        <property name="sharedCacheMode" value="ENABLE_SELECTIVE"/>
     </bean>
 
 
     <!-- 配置事务 -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"></property>
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <!-- 配置支持基于注解的事务 -->
+    <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- 配置SpringData部分 -->
-    <jpa:repositories base-package="org.ssh"
-                      entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
+    <jpa:repositories base-package="org.ssh.repository"
+                      entity-manager-factory-ref="entityManagerFactory"/>
 
 
 </beans>

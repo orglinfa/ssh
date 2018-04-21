@@ -5,5 +5,5 @@ import org.ssh.entity.UserInfo;
 
 public interface UserRepository extends JpaRepository<UserInfo,Long> {
 
-    public UserInfo findByUserName(String userName);
+    public UserInfo findByUsername(String userName);
 }

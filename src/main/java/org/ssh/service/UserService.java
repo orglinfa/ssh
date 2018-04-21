@@ -8,7 +8,8 @@ import org.ssh.repository.UserRepository;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    public UserInfo findByUserName(String userName){
-        return userRepository.findByUserName( userName);
+
+    public UserInfo findByUsername(String userName){
+        return userRepository.findByUsername( userName);
     }
 }
