@@ -24,14 +24,13 @@
     <!-- 配置数据源 -->
     <context:property-placeholder location="classpath:config.properties"/>
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="user" value="${jdbc.user}"></property>
-        <property name="password" value="${jdbc.password}"></property>
-        <property name="driverClass" value="${jdbc.driver}"></property>
-        <property name="jdbcUrl" value="${jdbc.url}"></property>
-
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
         <!-- 配置其他属性 -->
-        <property name="initialPoolSize" value="${jdbc.initPoolSize}"></property>
-        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
+        <property name="initialPoolSize" value="${jdbc.initPoolSize}"/>
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
     </bean>
     <!-- 配置JPA部分 -->
     <!-- 配置JPA的EntityManagerFactory -->
@@ -69,7 +68,7 @@
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- 配置SpringData部分 -->
-    <jpa:repositories base-package="com.lyj"
+    <jpa:repositories base-package="org.ssh"
                       entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
 
 
