@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.ssh.entity.UserInfo;
 import org.ssh.service.UserService;
 
@@ -16,6 +17,7 @@ public class UserHandler {
     @Autowired
     private UserService userService;
     @RequestMapping("/userLogin")
+    @ResponseBody
     public String login(@RequestParam("username")String username ,@RequestParam("password") String password){
         logger.info("username================="+username);
         UserInfo localUser=userService.findByUsername(username);
